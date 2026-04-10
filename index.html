@@ -3,10 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World Oldal</title>
+    <title>Hugging Face Adathalmaz Beolvasó</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f9fafb;
+            color: #1f2937;
+            text-align: center;
+            padding: 50px;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        #eredmeny {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2563eb; /* Kellemes kék */
+            margin-top: 20px;
+        }
+        .loading {
+            color: #6b7280;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello World!</h1>
-    <p>Ez az első weboldalam.</p>
+
+    <div class="container">
+        <h1>Adathalmaz Sorok Száma</h1>
+        <p>A <strong>Z3-Verified-Reasoning-Graphs</strong> JSONL fájl letöltése és feldolgozása a böngészőben...</p>
+        <div id="eredmeny" class="loading">Betöltés és számolás folyamatban...</div>
+    </div>
+
+    <script>
+        async function adathalmazBeolvasasa() {
+            // A Hugging Face "raw" (nyers) elérési útja a fájlodhoz
+            const url = "https://huggingface.co/datasets/nagygabor/Z3-Verified-Reasoning-Graphs/resolve/main/train_data_5k.jsonl";
+
+            try {
+                // 1. Letöltjük a fájlt a hálózatról
+                const valasz = await fetch(url);
+                if (!valasz.ok) {
+                    throw new Error(`Hálózati hiba: ${valasz.status}`);
+                }
+
+                // 2. Szöveggé alakítjuk a letöltött adatot
+                const szoveg = await valasz.text();
+
+                // 3. Szétválasztjuk a szöveget sortörések (\n) mentén,
+                // és a filter() segítségével eldobjuk a fájl végén lévő esetleges üres sorokat.
+                const sorok = szoveg.split('\n').filter(sor => sor.trim() !== '');
+
+                // 4. Kiírjuk az eredményt (a tömb hossza = sorok száma)
+                document.getElementById('eredmeny').innerText = `✅ Sikeres beolvasás! Az adathalmaz ${sorok.length} sort tartalmaz.`;
+                document.getElementById('eredmeny').classList.remove('loading');
+
+            } catch (hiba) {
+                // Ha valami hiba történik (pl. elírás a linkben)
+                document.getElementById('eredmeny').innerText = `❌ Hiba történt: ${hiba.message}`;
+                document.getElementById('eredmeny').style.color = "#dc2626"; // Piros
+                document.getElementById('eredmeny').classList.remove('loading');
+            }
+        }
+
+        // Oldal betöltésekor automatikusan meghívjuk a függvényt
+        adathalmazBeolvasasa();
+    </script>
+
 </body>
 </html>
