@@ -142,7 +142,7 @@ nav {
 }
 .hero-desc strong { color: var(--ink); font-weight: 500; }
 
-.hero-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 56px; }
+.hero-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 48px; }
 .btn {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 12px 22px; border-radius: var(--radius-sm);
@@ -183,6 +183,19 @@ nav {
 .stat-lbl {
   font-size: 11.5px; color: var(--ink-muted); font-weight: 400; line-height: 1.3;
 }
+.hero-author {
+  margin-top: 16px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-muted);
+}
+.hero-author a {
+  color: var(--cyan-dark);
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.15s;
+}
+.hero-author a:hover { opacity: 0.7; }
 
 /* ── GRAPH CANVAS AREA ── */
 .hero-visual {
@@ -233,6 +246,20 @@ nav {
   margin: 0 80px;
 }
 
+/* ── USE CASES ── */
+.use-case-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; margin-top: 48px;
+}
+.uc-card {
+  padding: 36px 32px; background: var(--white);
+  border-radius: var(--radius); border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm); transition: transform 0.2s, box-shadow 0.2s;
+}
+.uc-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.uc-title { font-size: 18px; font-weight: 600; margin-bottom: 12px; color: var(--ink); }
+.uc-desc { font-size: 14.5px; color: var(--ink-light); line-height: 1.6; }
+
 /* ── METRICS STRIP ── */
 .metrics-strip {
   background: var(--ink);
@@ -280,11 +307,11 @@ nav {
 /* ── TOPOLOGY ── */
 .topology-grid {
   display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 12px; margin-top: 48px;
+  gap: 20px; margin-top: 48px;
 }
 .topo-card {
   background: var(--white); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 20px; text-align: center;
+  border-radius: var(--radius); padding: 24px; text-align: center;
   transition: all 0.2s;
 }
 .topo-card:hover {
@@ -292,18 +319,18 @@ nav {
   box-shadow: var(--shadow-md);
   transform: translateY(-2px);
 }
-.topo-canvas { width: 100%; height: 130px; display: block; border-radius: 6px; }
+.topo-canvas { width: 100%; height: 130px; display: block; border-radius: 6px; margin-bottom: 12px; }
 .topo-name {
-  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  font-family: var(--mono); font-size: 12px; font-weight: 500;
   letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--ink); margin-top: 14px; margin-bottom: 6px;
+  color: var(--ink); margin-bottom: 8px;
 }
-.topo-desc { font-size: 12.5px; color: var(--ink-muted); line-height: 1.5; }
+.topo-desc { font-size: 13px; color: var(--ink-muted); line-height: 1.6; }
 
 /* ── TASKS ── */
 .tasks-grid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 12px; margin-top: 48px;
+  gap: 16px; margin-top: 48px;
 }
 .task-card {
   background: var(--white); border: 1px solid var(--border);
@@ -318,17 +345,17 @@ nav {
 }
 .task-card::after {
   content: ''; position: absolute;
-  bottom: 0; left: 0; right: 0; height: 2px;
+  bottom: 0; left: 0; right: 0; height: 3px;
   background: var(--card-color, var(--border));
-  opacity: 0.6;
+  opacity: 0.8;
 }
 .task-pct {
-  font-family: var(--serif); font-size: 52px; font-weight: 400;
+  font-family: var(--serif); font-size: 46px; font-weight: 400;
   color: var(--card-color, var(--ink)); line-height: 1;
   margin-bottom: 14px; opacity: 0.9;
 }
-.task-name { font-size: 15px; font-weight: 500; margin-bottom: 8px; color: var(--ink); }
-.task-desc { font-size: 13px; color: var(--ink-muted); line-height: 1.65; }
+.task-name { font-size: 16px; font-weight: 600; margin-bottom: 8px; color: var(--ink); }
+.task-desc { font-size: 14px; color: var(--ink-muted); line-height: 1.6; }
 
 /* ── CODE SHOWCASE ── */
 .code-section { background: var(--off-white); }
@@ -350,7 +377,7 @@ nav {
 pre {
   font-family: var(--mono); font-size: 13.5px; line-height: 1.85;
   padding: 32px 36px; overflow-x: auto;
-  color: var(--ink-light);
+  color: var(--ink-light); margin: 0;
 }
 .jk { color: #7c3aed; }
 .js { color: #059669; }
@@ -374,15 +401,22 @@ tr:hover td { background: var(--off-white); }
 td:first-child { color: var(--ink); font-weight: 500; }
 td:not(:first-child) { color: var(--cyan-dark); }
 
+/* ── FAQ ── */
+.faq-grid { display: grid; gap: 16px; margin-top: 48px; max-width: 800px; }
+.faq-item { background: var(--white); border: 1px solid var(--border); padding: 24px 32px; border-radius: var(--radius); }
+.faq-q { font-size: 17px; font-weight: 600; margin-bottom: 8px; color: var(--ink); }
+.faq-a { font-size: 14.5px; color: var(--ink-muted); line-height: 1.6; }
+
 /* ── PRICING ── */
 .pricing-grid {
   display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 12px; margin-top: 48px;
+  gap: 16px; margin-top: 48px;
 }
 .price-card {
   background: var(--white); border: 1px solid var(--border);
   border-radius: var(--radius); padding: 36px 28px;
   position: relative; transition: all 0.2s;
+  display: flex; flex-direction: column;
 }
 .price-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
 .price-card.featured {
@@ -392,25 +426,30 @@ td:not(:first-child) { color: var(--cyan-dark); }
 .featured-badge {
   position: absolute; top: 20px; right: 20px;
   font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.12em;
-  text-transform: uppercase; padding: 3px 9px; border-radius: 100px;
+  text-transform: uppercase; padding: 4px 10px; border-radius: 100px;
   background: var(--cyan); color: var(--white);
 }
 .price-amount {
   font-family: var(--serif); font-size: 42px; font-weight: 400;
-  line-height: 1; color: inherit; margin-bottom: 4px;
+  line-height: 1; color: inherit; margin-bottom: 8px;
 }
 .price-amount span { font-family: var(--sans); font-size: 15px; opacity: 0.5; font-weight: 400; }
-.price-name { font-size: 18px; font-weight: 600; margin-bottom: 4px; color: inherit; }
+.price-name { font-size: 18px; font-weight: 600; margin-bottom: 6px; color: inherit; }
 .price-sub {
   font-family: var(--mono); font-size: 11px; color: var(--ink-muted);
-  margin-bottom: 28px; letter-spacing: 0.04em;
+  margin-bottom: 12px; letter-spacing: 0.04em;
 }
 .price-card.featured .price-sub { color: rgba(255,255,255,0.4); }
+
+.price-tier-desc { font-size: 13.5px; font-weight: 500; margin-bottom: 24px; }
+.desc-cyan { color: var(--cyan-dark); }
+.desc-ink { color: var(--ink-light); }
+
 .price-features {
-  list-style: none; margin-bottom: 32px;
+  list-style: none; margin-bottom: 32px; flex-grow: 1;
 }
 .price-features li {
-  font-size: 13.5px; padding: 8px 0;
+  font-size: 13.5px; padding: 10px 0;
   border-bottom: 1px solid var(--border);
   display: flex; align-items: flex-start; gap: 10px;
   color: var(--ink-light);
@@ -420,7 +459,7 @@ td:not(:first-child) { color: var(--cyan-dark); }
   border-color: rgba(255,255,255,0.08);
 }
 .price-features li::before {
-  content: ''; flex-shrink: 0; width: 5px; height: 5px;
+  content: ''; flex-shrink: 0; width: 6px; height: 6px;
   border-radius: 50%; background: var(--emerald); margin-top: 7px;
 }
 .price-card.featured .price-features li::before { background: var(--cyan); }
@@ -474,23 +513,28 @@ footer {
 /* ── RESPONSIVE ── */
 @media (max-width: 960px) {
   nav { padding: 0 24px; }
-  .hero { grid-template-columns: 1fr; padding: 90px 32px 64px; gap: 48px; }
-  .hero-visual { display: none; }
+  .hero { grid-template-columns: 1fr; padding: 90px 32px 64px; gap: 32px; }
+  .hero-visual { margin-top: 16px; width: 100%; transform: scale(0.95); transform-origin: top center; }
+  .canvas-frame { max-width: 100%; overflow: hidden; }
+  
   .section { padding: 72px 32px; }
   .metrics-strip { padding: 60px 32px; }
   .divider { margin: 0 32px; }
   .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+  .use-case-grid { grid-template-columns: 1fr; }
+  .topology-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
   .pricing-grid { grid-template-columns: 1fr; }
-  .topology-grid { grid-template-columns: repeat(2, 1fr); }
-  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 40px; }
   footer { padding: 48px 32px 32px; }
   .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+}
+@media (max-width: 600px) {
+  .topology-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">
     <div class="nav-logo-mark">
@@ -512,7 +556,6 @@ footer {
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-content">
     <div class="hero-badge">Z3 Theorem Prover Verified · Zero Label Noise</div>
@@ -539,6 +582,9 @@ footer {
       <div class="stat"><div class="stat-val">120</div><div class="stat-lbl">Max nodes</div></div>
       <div class="stat"><div class="stat-val">42M</div><div class="stat-lbl">Tokens total</div></div>
     </div>
+    <div class="hero-author">
+      Dataset meticulously crafted by <a href="https://github.com/nagygabor123" target="_blank">@nagygabor</a>
+    </div>
   </div>
   <div class="hero-visual">
     <div class="canvas-frame">
@@ -555,7 +601,25 @@ footer {
 
 <div class="divider"></div>
 
-<!-- FEATURES / MINDMAP -->
+<section class="section fade-up">
+  <span class="section-label">Kinek való? / Who is this for?</span>
+  <h2>Designed for modern <em>AI workflows</em></h2>
+  <div class="use-case-grid">
+    <div class="uc-card">
+      <div class="uc-title">AI Researchers</div>
+      <div class="uc-desc">Perfect for studying algorithmic reasoning, System 2 scaling laws, and internal representations of constraint satisfaction problems in LLMs.</div>
+    </div>
+    <div class="uc-card">
+      <div class="uc-title">Open-Source Fine-Tuners</div>
+      <div class="uc-desc">Inject deterministic, verified reasoning capabilities into models like Llama-3 or Mistral without relying on hallucination-prone synthetic data.</div>
+    </div>
+    <div class="uc-card">
+      <div class="uc-title">Enterprise AI Teams</div>
+      <div class="uc-desc">Build specialized, high-accuracy planning agents that require rigid adherence to logical constraints for production environments.</div>
+    </div>
+  </div>
+</section>
+
 <section id="features" class="section features-section fade-up">
   <span class="section-label">Architecture</span>
   <h2>Why this dataset<br>is <em>different</em></h2>
@@ -564,7 +628,6 @@ footer {
   </div>
 </section>
 
-<!-- METRICS -->
 <div class="metrics-strip">
   <span class="section-label fade-up">By the numbers</span>
   <h2 class="fade-up">Dataset <em>analytics</em></h2>
@@ -592,10 +655,35 @@ footer {
   </div>
 </div>
 
-
 <div class="divider"></div>
 
-<!-- TASKS -->
+<section class="section fade-up">
+  <span class="section-label">Graph Structures</span>
+  <h2>4 Diverse <em>Topologies</em></h2>
+  <div class="topology-grid">
+    <div class="topo-card">
+      <canvas id="topo0" class="topo-canvas"></canvas>
+      <div class="topo-name">Random Graphs</div>
+      <div class="topo-desc">Erdős-Rényi models providing unstructured, unpredictable constraint landscapes to test baseline generalization.</div>
+    </div>
+    <div class="topo-card">
+      <canvas id="topo1" class="topo-canvas"></canvas>
+      <div class="topo-name">Bipartite</div>
+      <div class="topo-desc">Structured sets where no two nodes within the same set share edges. Crucial for testing exact 2-colorability detection.</div>
+    </div>
+    <div class="topo-card">
+      <canvas id="topo2" class="topo-canvas"></canvas>
+      <div class="topo-name">Tree Structures</div>
+      <div class="topo-desc">Hierarchical, cycle-free graphs. Models must learn efficient linear-time coloring strategies without getting stuck.</div>
+    </div>
+    <div class="topo-card">
+      <canvas id="topo3" class="topo-canvas"></canvas>
+      <div class="topo-name">Clique Variants</div>
+      <div class="topo-desc">Highly dense, interconnected subgraphs testing maximum chromatic number limits and extreme conflict resolution.</div>
+    </div>
+  </div>
+</section>
+
 <section class="section fade-up" style="background: var(--off-white);">
   <span class="section-label">Multi-task design</span>
   <h2>Five generalization <em>objectives</em></h2>
@@ -628,7 +716,6 @@ footer {
   </div>
 </section>
 
-<!-- CODE EXAMPLE -->
 <section class="section code-section fade-up">
   <span class="section-label">Data structure</span>
   <h2>Exact row <em>schema</em></h2>
@@ -661,7 +748,6 @@ footer {
   </div>
 </section>
 
-<!-- TOKEN TABLE -->
 <section class="section fade-up">
   <span class="section-label">Training economics</span>
   <h2>GPU hours & <em>cost estimation</em></h2>
@@ -688,15 +774,34 @@ footer {
   </div>
 </section>
 
-<!-- PRICING -->
+<section class="section fade-up">
+  <span class="section-label">FAQ</span>
+  <h2>Frequently Asked <em>Questions</em></h2>
+  <div class="faq-grid">
+    <div class="faq-item">
+      <div class="faq-q">Which models are compatible with this dataset?</div>
+      <div class="faq-a">Any model with a context window of at least 32k-64k tokens. It is explicitly formatted and tested for Llama-3, Mistral, and Qwen architectures.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Is the dataset updated regularly?</div>
+      <div class="faq-a">Yes, the 20k Gumroad tier receives bi-monthly updates with harder distributions and new permutation techniques. The 5k baseline is stable.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How is "0% label noise" guaranteed?</div>
+      <div class="faq-a">Every single graph, edge conflict, and valid coloring is calculated and rigorously verified using the Microsoft Z3 SMT solver before being converted to text.</div>
+    </div>
+  </div>
+</section>
+
 <section class="section fade-up" style="background: var(--off-white);">
   <span class="section-label">Access tiers</span>
   <h2>Choose your <em>scale</em></h2>
   <div class="pricing-grid">
     <div class="price-card">
-      <div class="price-amount">Free <span>/ forever</span></div>
+      <div class="price-amount">Free</div>
       <div class="price-name">5k Baseline</div>
       <div class="price-sub">// via HuggingFace</div>
+      <div class="price-tier-desc desc-ink">Perfect for testing pipelines & small experiments.</div>
       <ul class="price-features">
         <li>5,000 verified rows</li>
         <li>All 5 task types</li>
@@ -708,9 +813,10 @@ footer {
     </div>
     <div class="price-card featured">
       <span class="featured-badge">Popular</span>
-      <div class="price-amount">Paid <span>/ one-time</span></div>
+      <div class="price-amount">$49 <span>/ one-time</span></div>
       <div class="price-name">20k Dataset</div>
       <div class="price-sub">// via Gumroad</div>
+      <div class="price-tier-desc desc-cyan">Perfect for 7B-8B parameter model fine-tuning.</div>
       <ul class="price-features">
         <li>20,000 verified rows</li>
         <li>4× more diversity</li>
@@ -721,9 +827,10 @@ footer {
       <a href="https://mctsgraph.gumroad.com/l/dccit" target="_blank" class="btn btn-accent" style="width:100%;justify-content:center;">Buy on Gumroad</a>
     </div>
     <div class="price-card">
-      <div class="price-amount">Enterprise</div>
+      <div class="price-amount">$249 <span>/ one-time</span></div>
       <div class="price-name">100k Dataset</div>
       <div class="price-sub">// custom pipeline</div>
+      <div class="price-tier-desc desc-ink">Built for 70B+ enterprise models & robust evals.</div>
       <ul class="price-features">
         <li>100,000 verified rows</li>
         <li>~840M tokens</li>
@@ -731,12 +838,11 @@ footer {
         <li>Custom topology options</li>
         <li>B2B support via email</li>
       </ul>
-      <a href="mailto:contact@example.com" class="btn btn-secondary" style="width:100%;justify-content:center;">Contact for Access</a>
+      <a href="https://mctsgraph.gumroad.com/l/dccit" target="_blank" class="btn btn-secondary" style="width:100%;justify-content:center;">Buy on Gumroad</a>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
@@ -752,13 +858,13 @@ footer {
       <h4>Dataset</h4>
       <a href="https://huggingface.co/datasets/nagygabor/Z3-Verified-Reasoning-Graphs" target="_blank">HuggingFace</a>
       <a href="https://mctsgraph.gumroad.com/l/dccit" target="_blank">Gumroad Store</a>
-      <a href="mailto:contact@example.com">Contact</a>
+      <a href="https://huggingface.co/nagygabor">Contact</a>
     </div>
     <div class="footer-col">
       <h4>Resources</h4>
-      <a href="https://github.com" target="_blank">GitHub</a>
+      <a href="https://github.com/nagygabor123/mcts" target="_blank">GitHub Repo</a>
       <a href="#features">Documentation</a>
-      <a href="mailto:contact@example.com">Custom Datasets</a>
+      <a href="https://huggingface.co/nagygabor">Custom Datasets</a>
     </div>
   </div>
   <div class="footer-bottom">
