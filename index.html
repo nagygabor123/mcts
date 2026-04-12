@@ -752,7 +752,7 @@ footer {
       <div class="stat"><div class="stat-val">5K</div><div class="stat-lbl">Baseline rows</div></div>
       <div class="stat"><div class="stat-val">0%</div><div class="stat-lbl">Label noise</div></div>
       <div class="stat"><div class="stat-val">3</div><div class="stat-lbl">Algorithms</div></div>
-      <div class="stat"><div class="stat-val">42M</div><div class="stat-lbl">Total tokens</div></div>
+      <div class="stat"><div class="stat-val">5.4M</div><div class="stat-lbl">Total tokens</div></div>
     </div>
     <div class="hero-author">
       Dataset meticulously crafted by <a href="https://github.com/ngygbr01" target="_blank">@nagygabor</a>
@@ -810,9 +810,9 @@ footer {
       <div class="metric-sub">↑ 20k · 100k available</div>
     </div>
     <div class="metric-cell">
-      <div class="metric-num">~42M</div>
-      <div class="metric-lbl">Total tokens (cl100k_base)</div>
-      <div class="metric-sub">Avg 8,410 tokens / row</div>
+      <div class="metric-num">~5.4M</div>
+      <div class="metric-lbl">Total tokens (char/4 approx)</div>
+      <div class="metric-sub">Avg 1,089 tokens / row</div>
     </div>
     <div class="metric-cell">
       <div class="metric-num">1,869<span>+</span></div>
@@ -825,9 +825,9 @@ footer {
       <div class="metric-sub">Backtracking · DSATUR · Welsh-Powell</div>
     </div>
     <div class="metric-cell">
-      <div class="metric-num">64k<span>+</span></div>
+      <div class="metric-num">8k<span>+</span></div>
       <div class="metric-lbl">Context window needed</div>
-      <div class="metric-sub">Max 50,014 tokens / row</div>
+      <div class="metric-sub">Max 4,161 tokens / row</div>
     </div>
   </div>
 </div>
@@ -982,20 +982,20 @@ footer {
   <h2>Token statistics & <em>cost estimation</em></h2>
   <div class="code-frame" style="margin-top:48px;">
     <div class="code-bar">
-      <span class="code-title">Token statistics — char/4 approximation · cl100k_base compatible</span>
+      <span class="code-title">Token statistics — char/4 approximation · cl100k_base compatible · extrapolated to 5,000 rows</span>
     </div>
     <table>
       <thead>
         <tr>
           <th>Metric</th>
-          <th>3.4k Baseline (Free)</th>
+          <th>5k Baseline (Free)</th>
           <th>20k Dataset</th>
           <th>100k Dataset</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td>Total Rows</td><td>3,429</td><td>~20,000</td><td>~100,000</td></tr>
-        <tr><td>Total Tokens</td><td>~3.74M</td><td>~21.8M</td><td>~109M</td></tr>
+        <tr><td>Total Rows</td><td>5,000</td><td>~20,000</td><td>~100,000</td></tr>
+        <tr><td>Total Tokens</td><td>~5.45M</td><td>~21.8M</td><td>~109M</td></tr>
         <tr><td>Avg Tokens / Row</td><td>1,089</td><td>1,089</td><td>1,089</td></tr>
         <tr><td>Median Tokens / Row</td><td>899</td><td>~900</td><td>~900</td></tr>
         <tr><td>Max Tokens / Row</td><td>4,161</td><td>~4,200</td><td>~4,200</td></tr>
@@ -1019,10 +1019,10 @@ footer {
         </tr>
       </thead>
       <tbody>
-        <tr><td>task_a_coloring</td><td>1,378</td><td>4,161</td><td>1,432</td></tr>
-        <tr><td>task_b_validation</td><td>957</td><td>3,272</td><td>1,057</td></tr>
-        <tr><td>task_c_missing_color</td><td>887</td><td>3,116</td><td>754</td></tr>
-        <tr><td>task_d_chromatic</td><td>432</td><td>1,267</td><td>186</td></tr>
+        <tr><td>task_a_coloring</td><td>1,378</td><td>4,161</td><td>~2,088</td></tr>
+        <tr><td>task_b_validation</td><td>957</td><td>3,272</td><td>~1,541</td></tr>
+        <tr><td>task_c_missing_color</td><td>887</td><td>3,116</td><td>~1,099</td></tr>
+        <tr><td>task_d_chromatic</td><td>432</td><td>1,267</td><td>~271</td></tr>
       </tbody>
     </table>
   </div>
@@ -1034,7 +1034,7 @@ footer {
   <div class="faq-grid">
     <div class="faq-item">
       <div class="faq-q">Which models are compatible with this dataset?</div>
-      <div class="faq-a">Any model with a context window of at least 32k-64k tokens. It is explicitly formatted and tested for Llama-3, Mistral, and Qwen architectures.</div>
+      <div class="faq-a">Any model with a context window of at least 8k tokens is sufficient. The dataset is explicitly formatted and tested for Llama-3, Mistral, and Qwen architectures.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Is the dataset updated regularly?</div>
@@ -1069,7 +1069,7 @@ footer {
         <li>All 4 task types</li>
         <li>All 5 graph topologies</li>
         <li>3 solving strategies</li>
-        <li>~42M tokens · JSONL format</li>
+        <li>~5.45M tokens · JSONL format</li>
       </ul>
       <a href="https://huggingface.co/datasets/nagygabor/Z3-Verified-Reasoning-Graphs" target="_blank" class="btn btn-secondary" style="width:100%;justify-content:center;">Download Free</a>
     </div>
@@ -1082,7 +1082,7 @@ footer {
       <ul class="price-features">
         <li>20,000 verified rows</li>
         <li>4× more diversity</li>
-        <li>~210M tokens</li>
+        <li>~21.8M tokens</li>
         <li>Higher difficulty distribution</li>
         <li>Permutation augmented</li>
       </ul>
@@ -1095,7 +1095,7 @@ footer {
       <div class="price-tier-desc desc-ink">Built for 70B+ enterprise models & robust evals.</div>
       <ul class="price-features">
         <li>100,000 verified rows</li>
-        <li>~840M tokens</li>
+        <li>~109M tokens</li>
         <li>Full difficulty stratification</li>
         <li>Custom topology options</li>
         <li>B2B support via email</li>
