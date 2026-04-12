@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<h1 align="center">Z3-Verified MCTS Reasoning Graphs</h1>
+<h1 align="center">Z3-Verified Constraint Reasoning Dataset</h1>
 <h3 align="center"><em>5k Baseline · Production-Ready · Zero Label Noise</em></h3>
 
 [![Website](https://img.shields.io/badge/🌐_Website-000000?style=for-the-badge)](https://z3mcts.vercel.app/)
