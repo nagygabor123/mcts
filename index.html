@@ -979,25 +979,50 @@ footer {
 
 <section class="section fade-up">
   <span class="section-label">Training economics</span>
-  <h2>GPU hours & <em>cost estimation</em></h2>
+  <h2>Token statistics & <em>cost estimation</em></h2>
   <div class="code-frame" style="margin-top:48px;">
     <div class="code-bar">
-      <span class="code-title">Token statistics — cl100k_base tokenizer (GPT-4 / o1 standard)</span>
+      <span class="code-title">Token statistics — char/4 approximation · cl100k_base compatible</span>
     </div>
     <table>
       <thead>
         <tr>
           <th>Metric</th>
-          <th>5k Baseline (Free)</th>
+          <th>3.4k Baseline (Free)</th>
           <th>20k Dataset</th>
           <th>100k Dataset</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td>Total Tokens</td><td>~42.05M</td><td>~210M</td><td>~840M</td></tr>
-        <tr><td>Avg Tokens / Row</td><td>8,410</td><td>8,410</td><td>8,410</td></tr>
-        <tr><td>Max Context Required</td><td>50,014</td><td>50,000–65,000</td><td>50,000–65,000</td></tr>
-        <tr><td>Recommended Model Context</td><td>64k+</td><td>64k+</td><td>64k+</td></tr>
+        <tr><td>Total Rows</td><td>3,429</td><td>~20,000</td><td>~100,000</td></tr>
+        <tr><td>Total Tokens</td><td>~3.74M</td><td>~21.8M</td><td>~109M</td></tr>
+        <tr><td>Avg Tokens / Row</td><td>1,089</td><td>1,089</td><td>1,089</td></tr>
+        <tr><td>Median Tokens / Row</td><td>899</td><td>~900</td><td>~900</td></tr>
+        <tr><td>Max Tokens / Row</td><td>4,161</td><td>~4,200</td><td>~4,200</td></tr>
+        <tr><td>p95 Tokens / Row</td><td>2,658</td><td>~2,700</td><td>~2,700</td></tr>
+        <tr><td>Recommended Model Context</td><td>8k+</td><td>8k+</td><td>8k+</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="code-frame" style="margin-top:20px;">
+    <div class="code-bar">
+      <span class="code-title">Avg tokens / row — broken down by task type</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Task Type</th>
+          <th>Avg Tokens</th>
+          <th>Max Tokens</th>
+          <th>Row Count</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>task_a_coloring</td><td>1,378</td><td>4,161</td><td>1,432</td></tr>
+        <tr><td>task_b_validation</td><td>957</td><td>3,272</td><td>1,057</td></tr>
+        <tr><td>task_c_missing_color</td><td>887</td><td>3,116</td><td>754</td></tr>
+        <tr><td>task_d_chromatic</td><td>432</td><td>1,267</td><td>186</td></tr>
       </tbody>
     </table>
   </div>
