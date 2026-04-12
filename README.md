@@ -66,14 +66,12 @@ Open-source LLMs hallucinate on constraint satisfaction problems because they ar
 
 > Profiled with `cl100k_base` (o1 / GPT-4 standard tokenizer)
 
-
 | Metric | 5k Baseline | 20k Dataset | 100k Dataset |
 | :---: | :---: | :---: | :---: |
-| **Total Tokens** | ~42.05M | ~210M | ~840M |
-| **Avg Tokens / Row** | 8,410 | 8,410 | 8,410 |
-| **Max Context Window** | 50,014 | 50k–65k | 50k–65k |
-| **Recommended Model** | 64k+ ctx | 64k+ ctx | 64k+ ctx |
-
+| **Total Tokens** | ~5.45M | ~21.8M | ~109M |
+| **Avg Tokens / Row** | 1,089 | 1,089 | 1,089 |
+| **Max Context Window** | 4,161 | ~4,200 | ~4,200 |
+| **Recommended Model** | 8k+ ctx | 8k+ ctx | 8k+ ctx |
 
 ---
 
