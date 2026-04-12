@@ -1,99 +1,190 @@
 
 
-# Z3 - Verified MCTS Reasoning Graphs
+<div align="center">
 
-[![More Dataset](https://img.shields.io/badge/Unlock_the_Bigger_Dataset-FF90E8?style=for-the-badge&logo=gumroad)](https://mctsgraph.gumroad.com/l/dccit)
-[![Hugging Face](https://img.shields.io/badge/Dataset_on_Hugging_Face-FFD21E?style=for-the-badge&logo=huggingface)](https://huggingface.co/datasets/nagygabor/Z3-Verified-Reasoning-Graphs)
-[![Email Contact](https://img.shields.io/badge/Contact_Me-blue?style=for-the-badge)](mailto:ngygabor01@gmail.com)
+<h1 align="center">Z3-Verified MCTS Reasoning Graphs</h1>
+<h3 align="center"><em>5k Baseline · Production-Ready · Zero Label Noise</em></h3>
 
+[![Website](https://img.shields.io/badge/🌐_Website-000000?style=for-the-badge)](https://z3mcts.vercel.app/)
+[![Bigger Dataset](https://img.shields.io/badge/⚡_Unlock_100k_Rows-FF90E8?style=for-the-badge&logo=gumroad&logoColor=white)](https://mctsgraph.gumroad.com/l/dccit)
+[![Contact](https://img.shields.io/badge/✉_Contact-0A66C2?style=for-the-badge)](mailto:ngygabor01@gmail.com)
 
-## Overview
-Current Open-Source LLMs struggle with "System 2" (slow, logical) reasoning, often hallucinating solutions to complex constraint satisfaction problems. Most synthetic math datasets only provide the "happy path" or rely on LLM-generated traces, which inject **label noise** and hallucinations into the fine-tuning process.
-
-This repository provides a **5,000-row production-ready baseline dataset** of highly diverse, deterministic, Z3-Theorem-Prover verified graph coloring tasks. It is designed specifically to train LLMs (like Llama-3, Mistral, Qwen) in **Monte Carlo Tree Search (MCTS) style backtracking, conflict resolution, and constraint satisfaction**, mimicking O1-level reasoning capabilities.
-
-## Key Features 
-* **0% Label Noise (Z3 Verified):** Every single graph, chromatic number, and solution has been mathematically verified by the Microsoft Z3 Theorem Prover. There are zero LLM hallucinations in this dataset.
-* **Information-Dense Reasoning Traces:** No chatty narrative ("Let's think step by step..."). The `reasoning` field is a strict, programmatic JSON trace showing the greedy heuristic search, forbidden colors, and explicit `[backtrack]` signals when downstream conflicts are detected.
-* **High Complexity:** Unlike toy datasets, these graphs scale from 8 up to **120 nodes and 1,600+ edges**.
-* **Permutation Augmented:** Node indices are randomly shuffled and colors are relabeled to prevent "pattern memorization". The model is forced to learn the *algorithm*, not the dataset.
-
-## Dataset Analytics & Distributions
-To ensure absolute diversity and prevent pattern memorization, the dataset was generated with high-variance parameters. Below are the distributions of the 5k baseline dataset.
-
-<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between;">
-  <div style="width: 48%; margin-bottom: 20px;">
-    <img src="https://huggingface.co/datasets/nagygabor/Z3-Verified-Reasoning-Graphs/resolve/main/DistributionOfReasoningTasks.png" alt="Distribution of Reasoning Tasks" />
-    <p><em><b>Task Distribution:</b> A heavy emphasis (50%) is placed on full graph coloring to establish core algorithmic routing, supplemented by verification and conflict resolution tasks to enforce strict constraint satisfaction.</em></p>
-  </div>
-  <div style="width: 48%; margin-bottom: 20px;">
-    <img src="https://huggingface.co/datasets/nagygabor/Z3-Verified-Reasoning-Graphs/resolve/main/TopologiesDifficultyLeves.png" alt="Topologies and Difficulty" />
-    <p><em><b>Topological Diversity:</b> Graphs are evenly distributed across random, bipartite, tree, and near-clique structures, stratified dynamically into Easy, Medium, and Hard tiers to ensure progressive learning curves.</em></p>
-  </div>
-  <div style="width: 48%; margin-bottom: 20px;">
-    <img src="https://huggingface.co/datasets/nagygabor/Z3-Verified-Reasoning-Graphs/resolve/main/NodesVsEdges.png" alt="Nodes vs Edges Complexity" />
-    <p><em><b>Complexity Scaling:</b> Edge density scales non-linearly with node counts (up to 120 nodes and 1600+ edges), actively forcing the models into deep state-space exploration rather than shallow pattern matching.</em></p>
-  </div>
-  <div style="width: 48%; margin-bottom: 20px;">
-    <img src="https://huggingface.co/datasets/nagygabor/Z3-Verified-Reasoning-Graphs/resolve/main/ReasoningTraceLength.png" alt="Reasoning Trace Length" />
-    <p><em><b>Information Density:</b> Trace lengths vary naturally based on problem complexity, yielding highly compressed, token-efficient JSON reasoning steps without verbose narrative bloat.</em></p>
-  </div>
 </div>
 
-## Compute & Training Economics (Token Statistics)
-To assist ML engineers in estimating GPU hours and Supervised Fine-Tuning (SFT) costs, the dataset has been profiled using the standard `cl100k_base` (o1/GPT-4) tokenizer.
-| Dataset Metric | 5k dataset | 20k dataset | 100k dataset |
-| :--- | :--- | :--- | :--- |
-| **Total Dataset Tokens** | ~42.05 Million | ~210 Million | ~840 Million |
-| **Average Tokens / Row** | 8,410 | 8,410 | 8,410 |
-| **Max Context Needed** | 50,014 *(Requires >64k context model)* | 50,000 - 65,000 | 50,000 - 65,000 |
+
+# The Problem This Solves
+ 
+> *Most synthetic reasoning datasets only show the "happy path". Real reasoning requires knowing when to **backtrack**.*
+ 
+Open-source LLMs hallucinate on constraint satisfaction problems because they are trained on fluent-sounding but logically inconsistent traces. This dataset is different:
+ 
+- ❌ No LLM-generated reasoning — **zero hallucinations, zero label noise**
+- ✅ Every solution verified by the **Microsoft Z3 Theorem Prover**
+- ✅ Traces show real search: **dead ends, backtrack signals, constraint propagation**
+- ✅ Three distinct algorithms teach the model **multiple valid solution paths**
+ 
+
+---
+
+## Key Features
+
+| Feature | Detail |
+|---|---|
+| **0% Label Noise** | Every graph, chromatic number, and coloring is Z3-verified — mathematically proven correct |
+| **3 Solving Strategies** | Backtracking/MRV (44%) · DSATUR (30%) · Welsh-Powell (26%) |
+| **Real Verification Traces** | `task_b` shows actual per-edge checks: `Edge (4,8): color 4 ≠ color 1 → OK ✓` |
+| **5 Graph Topologies** | `random` · `bipartite` · `tree` · `dense` · `near_clique` |
+| **Permutation Augmented** | Node indices & colors randomly shuffled — model learns the algorithm, not patterns |
+| **Structural Preamble** | Every reasoning trace starts with clique bounds, Brooks' theorem, and χ(G) proof |
+
+---
+
+## Dataset Analytics
+
+<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between;">
+  <div style="width: 48%; margin-bottom: 20px;">
+    <img src="https://huggingface.co/datasets/nagygabor/Z3-Verified-Reasoning-Graphs/resolve/main/DistributionOfReasoningTasks.png" alt="Distribution of Reasoning Tasks" />
+    <p><em><b>Task Distribution:</b> ~41% full coloring · ~31% validation · ~22% missing color · ~5% chromatic number</em></p>
+  </div>
+  <div style="width: 48%; margin-bottom: 20px;">
+    <img src="https://huggingface.co/datasets/nagygabor/Z3-Verified-Reasoning-Graphs/resolve/main/TopologiesDifficultyLeves.png" alt="Topologies and Difficulty" />
+    <p><em><b>Difficulty Split:</b> Easy 17% · Medium 38% · Hard 45% — across 5 structural graph families</em></p>
+  </div>
+  <div style="width: 48%; margin-bottom: 20px;">
+    <img src="https://huggingface.co/datasets/nagygabor/Z3-Verified-Reasoning-Graphs/resolve/main/NodesVsEdges.png" alt="Nodes vs Edges Complexity" />
+    <p><em><b>Complexity Scaling:</b> 10–65 nodes · up to 1,869 edges · non-linear density forces deep search</em></p>
+  </div>
+  <div style="width: 48%; margin-bottom: 20px;">
+    <img src="https://huggingface.co/datasets/nagygabor/Z3-Verified-Reasoning-Graphs/resolve/main/ReasoningTraceLength.png" alt="Reasoning Trace Length" />
+    <p><em><b>Trace Completeness:</b> Full per-node logs (20 detailed + compact remainder) — no mid-trace truncation</em></p>
+  </div>
+</div>
+
+---
+
+## Training Economics
+
+> Profiled with `cl100k_base` (o1 / GPT-4 standard tokenizer)
 
 
-## Multi-Task Generalization
-To prevent overfitting to a single prompt, the dataset is balanced across 5 distinct task types:
-1. **Full Graph Coloring (50%):** Standard coloring with greedy backtracking traces.
-2. **Validation (20%):** The model receives a coloring (50% valid, 50% intentionally corrupted) and must find the edge conflict.
-3. **Missing Color (15%):** Deduce the valid color for a single uncolored node based on its neighbors.
-4. **Conflict Resolution (10%):** The model is given a graph with exactly one edge conflict and must identify and fix it.
-5. **Exact Chromatic Number (5%):** Determine the absolute minimum number of colors required (Z3 calculated).
-
-## Dataset Structure
-| JSON Field | Description |
-| :--- | :--- |
-| **`task_type`** | The specific task (e.g., `task_a_coloring`, `task_b_validation`). |
-| **`graph_type`** | Topologies include `bipartite`, `tree`, `random`, and `near_clique`. |
-| **`difficulty`** | Heuristically calculated based on edge density and chromatic number (`easy`, `medium`, `hard`). |
-| **`nodes` & `edges`** | Integer counts of the graph size. |
-| **`instruction`** | The prompt for the LLM. |
-| **`reasoning`** | The step-by-step state-space search and backtracking log. |
-| **`solution`** | The final, verified correct answer. |
+| Metric | 5k Baseline | 20k Dataset | 100k Dataset |
+| :---: | :---: | :---: | :---: |
+| **Total Tokens** | ~42.05M | ~210M | ~840M |
+| **Avg Tokens / Row** | 8,410 | 8,410 | 8,410 |
+| **Max Context Window** | 50,014 | 50k–65k | 50k–65k |
+| **Recommended Model** | 64k+ ctx | 64k+ ctx | 64k+ ctx |
 
 
-Exact Row Structure Example
-To give you a precise idea of what to expect, here is an exact structure of a single row from the dataset:
+---
+
+## Task Types
+
+
+| Task | Share | What the Model Learns |
+| :--- | :---: | :--- |
+| **Full Graph Coloring** | ~41% | Complete backtracking/greedy trace with structural preamble |
+| **Validation** | ~31% | Real per-edge conflict detection — 50% valid, 50% corrupted |
+| **Missing Color** | ~22% | Constraint propagation: forbidden colors → available colors |
+| **Exact Chromatic Number** | ~5% | Lower bound (clique/odd cycle) + upper bound (Brooks) + Z3 proof |
+
+
+---
+
+## Solving Strategy Distribution
+
+Each row is tagged with the algorithm that produced its reasoning trace:
+
+
+
+| Strategy | Share | Style |
+| :--- | :---: | :--- |
+| **Backtracking / MRV** | ~44% | Most-restricted variable first · up to 12 look-ahead backtrack events |
+| **DSATUR** | ~30% | Dynamic saturation · always colors the most constrained node · near-optimal |
+| **Welsh-Powell** | ~26% | Greedy degree-order · fast, no backtracking · full forbidden-color log per step |
+
+
+
+---
+
+## Schema Reference
+
+```typescript
+{
+  "task_type":   "task_a_coloring" | "task_b_validation" | "task_c_missing_color" | "task_d_chromatic",
+  "graph_type":  "random" | "bipartite" | "tree" | "dense" | "near_clique",
+  "difficulty":  "easy" | "medium" | "hard",
+  "strategy":    "backtracking" | "dsatur" | "welsh_powell", // NEW in v2
+  "nodes":       number,  // 10 – 65
+  "edges":       number,  // up to 1,869
+  "instruction": string,  // prompt string
+  "reasoning":   string,  // structural preamble + full algorithm trace
+  "solution":    string   // Z3-verified answer
+}
+```
+
+---
+
+## Row Examples
+
+<details>
+<summary><b>task_a_coloring — DSATUR trace</b></summary>
 
 ```json
 {
-  "task_type": "task_a_coloring",
-  "graph_type": "bipartite",
-  "difficulty": "medium",
-  "nodes": 97,
-  "edges": 1613,
-  "instruction": "Graph with 97 nodes. Edges: [(66, 24), (66, 13)... Color the graph using at most 3 colors so no adjacent nodes share a color. Provide the strategy and reasoning steps.",
-  "reasoning": "{\"strategy\": \"greedy_backtracking\", \"heuristics\": [\"highest_degree_first\", \"smallest_available_color\"], \"steps\": [{\"node\": 92, \"assigned_color\": 1, \"forbidden_colors\": []}, {\"node\": 76, \"assigned_color\": 1, \"forbidden_colors\": []}, ... {\"node\": 12, \"assigned_color\": 0, \"forbidden_colors\": [1]}, ... ]}",
-  "solution": "{92: 1, 76: 1, 39: 1, 12: 0, 53: 0, 28: 1 ... 75: 0, 83: 1}"
+  "task_type": "task_a_coloring",
+  "graph_type": "bipartite",
+  "difficulty": "medium",
+  "strategy": "dsatur",
+  "nodes": 42,
+  "edges": 260,
+  "instruction": "Color this graph using at most 2 color(s) so that no two adjacent nodes share the same color. Show your full reasoning before giving the final assignment.\nAdjacency list: 0:[12,16,19,...] ...",
+  "reasoning": "Structural analysis:\n  • 42 nodes, 260 edges, density=0.302, max_degree=16.\n  • Graph is bipartite → no odd cycles → χ(G)≤2.\n  • Largest clique: [2, 32] (size 2) → χ(G)≥2.\n  • Chromatic number: χ(G) = 2.\n  • Budget: exactly 2 color(s) — must achieve the minimum.\n\nStrategy: DSATUR...\nNode 20 selected (saturation=0, degree=16): neighbor colors=∅. Assign color 0.\nNode 7 selected (saturation=1, degree=15): neighbor colors=[0]. Assign color 1.\n...",
+  "solution": "{20: 0, 7: 1, 16: 0, ...}"
 }
 ```
+</details>
+
+<details>
+<summary><b>task_b_validation — real edge-check trace</b></summary>
+
+```json
+{
+  "task_type": "task_b_validation",
+  "graph_type": "random",
+  "difficulty": "medium",
+  "strategy": "welsh_powell",
+  "nodes": 43,
+  "edges": 226,
+  "reasoning": "I need to verify whether this coloring is valid by checking every edge for color conflicts.\nSpot-checking 12 of 226 edges (all edges verified internally):\n  Edge (0,13): node 0 has color 1, node 13 has color 4 → OK ✓\n  Edge (4,8):  node 4 has color 4, node 8  has color 1 → OK ✓\n  Edge (10,8): node 10 has color 2, node 8  has color 1 → OK ✓\n  ...\nVerdict: VALID — no conflicts found.",
+  "solution": "VALID"
+}
+```
+</details>
+
+<details>
+<summary><b>task_a_coloring — Backtracking with look-ahead</b></summary>
+
+```json
+{
+  "task_type": "task_a_coloring",
+  "strategy": "backtracking",
+  "reasoning": "Strategy: Backtracking with MRV heuristic.\n...\nSearch trace (key backtrack events):\n  • Assigned color 0 to node 14 (degree 8), but this forced node 22 (degree 6) into a dead end — its neighbors already use colors [0, 1, 2], leaving no valid color out of 3 available. Backtracking: try a different color for node 14.\n  • ..."
+}
+```
+</details>
+
 ---
-## Let's Connect
 
-Whether you need a custom dataset tailored to your specific topological needs, or you want to integrate verified reasoning traces into your B2B pipeline, I'm happy to help.
+<div align="center">
 
-* **Email:** [ngygabor01@gmail.com](mailto:ngygabor01@gmail.com)
-* **Huggingface:** [Demo dataset](https://huggingface.co/datasets/nagygabor/Z3-Verified-Reasoning-Graphs)
-* **Upgrade your training:** [20k or 100k datasets](https://mctsgraph.gumroad.com/l/dccit)
+<h2 align="center">Let's Connect</h2>
 
+*Need a custom dataset? Want to integrate verified reasoning traces into your B2B pipeline?*
 
-<p align="center">
-  <em>Built with precision!</em>
-</p>
+**[🌐 Website](https://z3mcts.vercel.app/)** · **[⚡ Get 20k / 100k](https://mctsgraph.gumroad.com/l/dccit)** · **[✉ ngygabor01@gmail.com](mailto:ngygabor01@gmail.com)**
+
+---
+
+*Built with precision · Z3 Theorem Prover*
+
+</div>
